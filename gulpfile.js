@@ -10,7 +10,20 @@ var gulp          = require('gulp'),
 		rename        = require('gulp-rename'),
 		autoprefixer  = require('gulp-autoprefixer'),
 		notify        = require("gulp-notify"),
-		rsync         = require('gulp-rsync');
+		rsync         = require('gulp-rsync'),
+		pug						= require('gulp-pug'),
+		pugbem				= require('gulp-pugbem');
+
+pugbem.m = '_';
+
+gulp.task('pages', function () {
+    return gulp.src('app/pages/*.pug')
+        .pipe(pug({
+            plugins: [pugbem],
+						pretty: true
+        }))
+        .pipe(gulp.dest('app/'));
+});
 
 gulp.task('browser-sync', function() {
 	browserSync({
@@ -62,6 +75,7 @@ gulp.task('rsync', function() {
 
 gulp.task('watch', ['styles', 'js', 'browser-sync'], function() {
 	gulp.watch('app/'+syntax+'/**/*.'+syntax+'', ['styles']);
+	gulp.watch('app/**/*.pug', ['pages']);
 	gulp.watch(['libs/**/*.js', 'app/js/common.js'], ['js']);
 	gulp.watch('app/*.html', browserSync.reload)
 });
