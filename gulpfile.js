@@ -16,8 +16,8 @@ var gulp          = require('gulp'),
 
 pugbem.m = '_';
 
-gulp.task('pages', function () {
-    return gulp.src('app/pages/*.pug')
+gulp.task('pug', function () {
+    return gulp.src('app/pug/*.pug')
         .pipe(pug({
             plugins: [pugbem],
 						pretty: true
@@ -75,7 +75,7 @@ gulp.task('rsync', function() {
 
 gulp.task('watch', ['styles', 'js', 'browser-sync'], function() {
 	gulp.watch('app/'+syntax+'/**/*.'+syntax+'', ['styles']);
-	gulp.watch('app/**/*.pug', ['pages']);
+	gulp.watch('app/**/*.pug', ['pug']);
 	gulp.watch(['libs/**/*.js', 'app/js/common.js'], ['js']);
 	gulp.watch('app/*.html', browserSync.reload)
 });
