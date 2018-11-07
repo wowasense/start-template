@@ -15,3 +15,10 @@
 - rsync
 - pug
 - pugbem
+
+### Развертывание и подготовка к работе
+
+1. git clone https://github.com/wowasense/start-template.git
+2. cd start-template/
+3. npm i
+4. git init | git add . | git commit -m 'first commit'
